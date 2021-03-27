@@ -4,11 +4,11 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Factorio data.raw Visualiser</title>
-		<script src="/json-formatter.umd.js"></script>
+		<script src="json-formatter.umd.js"></script>
 	</head>
 	<body style="background-color: rgb(30, 30, 30)">
 		<script>
-			fetch("/data-raw.json").then((resp) => {
+			fetch("data-raw.json").then((resp) => {
 				resp.json().then(data => {
 					const formatter = new JSONFormatter(data, 1, { theme: "dark" });
 					document.body.appendChild(formatter.render());
