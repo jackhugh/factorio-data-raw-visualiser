@@ -1,31 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Factorio data.raw Visualiser</title>
-	<script src="json-formatter.umd.js"></script>
-	<style>
-		body {
-			background-color: rgb(30, 30, 30);
-		}
-	</style>
-</head>
-<body>
-	<script>
-		let request = new XMLHttpRequest();
-		request.open("GET", "data-raw.json");
-		request.onload = function () {
-			if (this.status >= 200 && this.status < 400) {
-				const data = JSON.parse(this.response);
-				const config = {
-					theme: 'dark'
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Factorio data.raw Visualiser</title>
+		<script src="/json-formatter.umd.js"></script>
+	</head>
+	<body style="background-color: rgb(30, 30, 30)">
+		<script>
+			var request = new XMLHttpRequest();
+			request.open("GET", "/data-raw.json");
+			request.onload = function () {
+				if (this.status === 200) {
+					var data = JSON.parse(this.response);
+					var formatter = new JSONFormatter(data, 1, { theme: "dark" });
+					document.body.appendChild(formatter.render());
 				}
-				const formatter = new JSONFormatter(data, 1, config);
-				document.body.appendChild(formatter.render());
-			}
-		}
-		request.send();
-	</script>
-</body>
+			};
+			request.send();
+		</script>
+	</body>
 </html>
