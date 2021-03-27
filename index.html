@@ -8,16 +8,12 @@
 	</head>
 	<body style="background-color: rgb(30, 30, 30)">
 		<script>
-			var request = new XMLHttpRequest();
-			request.open("GET", "/data-raw.json");
-			request.onload = function () {
-				if (this.status === 200) {
-					var data = JSON.parse(this.response);
-					var formatter = new JSONFormatter(data, 1, { theme: "dark" });
+			fetch("/data-raw.json").then((resp) => {
+				resp.json().then(data => {
+					const formatter = new JSONFormatter(data, 1, { theme: "dark" });
 					document.body.appendChild(formatter.render());
-				}
-			};
-			request.send();
+				});
+			});
 		</script>
 	</body>
 </html>
